@@ -240,7 +240,6 @@
 						<configuration>
 							<sourceDirs>
 								<sourceDir>${project.basedir}/src/test/kotlin</sourceDir>
-								<sourceDir>${project.basedir}/src/test/java</sourceDir>
 							</sourceDirs>
 						</configuration>
 					</execution>
@@ -265,20 +264,6 @@
 						<id>default-testCompile</id>
 						<phase>none</phase>
 					</execution>
-					<execution>
-						<id>java-compile</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>compile</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>java-test-compile</id>
-						<phase>test-compile</phase>
-						<goals>
-							<goal>testCompile</goal>
-						</goals>
-					</execution>
 				</executions>
 			</plugin>
 			<plugin>
@@ -286,7 +271,7 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<excludes>
-						<exclude>**/*BundleTest.java</exclude>
+						<exclude>**/*BundleTest.*</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
@@ -295,7 +280,7 @@
 				<artifactId>maven-failsafe-plugin</artifactId>
 				<configuration>
 					<includes>
-						<include>**/*BundleTest.java</include>
+						<include>**/*BundleTest.*</include>
 					</includes>
 				</configuration>
 				<executions>
