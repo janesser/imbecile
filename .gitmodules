@@ -1,0 +1,3 @@
+[submodule "sham-ssh"]
+	path = sham-ssh
+	url = git@github.com:janesser/sham-ssh.git

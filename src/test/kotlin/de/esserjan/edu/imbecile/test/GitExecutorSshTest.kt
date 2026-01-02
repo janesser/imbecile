@@ -59,6 +59,7 @@ class GitExecutorSshTest : GitTestSupport() {
             Files.setPosixFilePermissions(askPassFile.toPath(), PosixFilePermissions.fromString("rwx------"))
             askPassFile.deleteOnExit()
 
+            // FIXME on github-actions | debug1: read_passphrase: can't open /dev/tty: No such device or address
             FileWriter(askPassFile).use { writer ->
                 writer.write("#!/bin/sh")
                 writer.write(System.lineSeparator())
@@ -76,14 +77,16 @@ class GitExecutorSshTest : GitTestSupport() {
     @Throws(IOException::class, InterruptedException::class)
     fun startSshMock() {
         val knownHosts = File(System.getProperty("user.home") + "/.ssh", "known_hosts")
-        val sshkeygenCleanup = Runtime.getRuntime().exec(
-            arrayOf(
-                "/usr/bin/ssh-keygen", //
-                "-f", knownHosts.absolutePath, //
-                "-R", "[${SshData.SSH_SERVER}]:${SshData.SSH_MOCK_PORT}" //
+        if (knownHosts.exists()) {
+            val sshkeygenCleanup = Runtime.getRuntime().exec(
+                arrayOf(
+                    "/usr/bin/ssh-keygen", //
+                    "-f", knownHosts.absolutePath, //
+                    "-R", "[${SshData.SSH_SERVER}]:${SshData.SSH_MOCK_PORT}" //
+                )
             )
-        )
-        assertEquals(0, sshkeygenCleanup.waitFor(), sshkeygenCleanup.errorReader().readLine())
+            assertEquals(0, sshkeygenCleanup.waitFor(), sshkeygenCleanup.errorReader().readLine())
+        }
 
         server = MockGitServer(SshData.SSH_MOCK_PORT)
         server?.allowPublicKey(SshKeyUtils.getPublicKey(keyFilePub).jcePublicKey)?.enableShell()

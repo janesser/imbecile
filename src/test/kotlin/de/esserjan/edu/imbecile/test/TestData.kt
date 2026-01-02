@@ -20,7 +20,7 @@ interface TestData {
     interface SshData {
         companion object {
             const val SSH_TEST_KEY = "testKey"
-            const val SSH_TEST_KEY_PWD = "testKeyPassword"
+            const val SSH_TEST_KEY_PWD = "" // "testKeyPassword"
             const val SSH_TEST_ASKPASS = "testAskPass.sh"
             const val SSH_TEST_PRINCIPAL = "testPrincipal"
             const val SSH_MOCK_PORT = 61333 // auto select
