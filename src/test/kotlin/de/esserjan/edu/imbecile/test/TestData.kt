@@ -15,6 +15,9 @@ interface TestData {
 
         const val GIT_MOCK_REMOTE = "mockRemote"
         const val GIT_REMOTE_PROJECT = "egit.git"
+
+        const val GIT_USER_NAME = "Test User Name"
+        const val GIT_USER_EMAIL = "Test.User@Email"
     }
 
     interface SshData {
@@ -26,7 +29,7 @@ interface TestData {
             const val SSH_MOCK_PORT = 61333 // auto select
             const val SSH_SERVER = "localhost"
             val GIT_REMOTE_URL = String.format("ssh://%s@%s:%d/%s",
-                SSH_TEST_PRINCIPAL, SSH_SERVER, SSH_MOCK_PORT, TestData.GIT_REMOTE_PROJECT)
+                SSH_TEST_PRINCIPAL, SSH_SERVER, SSH_MOCK_PORT, GIT_REMOTE_PROJECT)
         }
     }
 
@@ -38,7 +41,7 @@ interface TestData {
             const val HTTPS_USERNAME = "user"
             const val HTTPS_PASSWORD = "pass"
             val GIT_REMOTE_URL = String.format("https://%s@%s:%d/%s",
-                HTTPS_USERNAME, HTTPS_HOST, HTTPS_PORT, TestData.GIT_REMOTE_PROJECT)
+                HTTPS_USERNAME, HTTPS_HOST, HTTPS_PORT, GIT_REMOTE_PROJECT)
             const val HTTPS_GIT_FOLDER = "test_git_https"
             const val HTTPS_CERT_PASSWORD = "mockedSecret"
         }

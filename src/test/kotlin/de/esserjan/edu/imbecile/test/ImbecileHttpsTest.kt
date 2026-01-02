@@ -7,7 +7,6 @@ import org.hamcrest.Matchers.*
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertTrue
 import java.io.File
-import java.util.*
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
 abstract class ImbecileHttpsTest(serverHolder: ServerHolder) : GitHttpsTestSupport(serverHolder) {
@@ -69,6 +68,9 @@ abstract class ImbecileHttpsTest(serverHolder: ServerHolder) : GitHttpsTestSuppo
         )
         assertExitCodeZero(fillResult)
 
+        executor.config("user.name", TestData.GIT_USER_NAME)
+        executor.config("user.email", TestData.GIT_USER_EMAIL)
+
         val commitResult = executor.commit("empty commit", allowEmpty = true)
         assertExitCodeZero(commitResult)
 
@@ -95,6 +97,9 @@ abstract class ImbecileHttpsTest(serverHolder: ServerHolder) : GitHttpsTestSuppo
             "wrong" + HttpsData.HTTPS_PASSWORD
         )
         assertExitCodeZero(storeResult)
+
+        executor.config("user.name", TestData.GIT_USER_NAME)
+        executor.config("user.email", TestData.GIT_USER_EMAIL)
 
         executor.commit("empty commit", allowEmpty = true)
         val pushResult = executor.push(HttpsData.GIT_REMOTE_URL)

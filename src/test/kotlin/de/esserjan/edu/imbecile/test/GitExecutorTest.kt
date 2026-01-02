@@ -1,6 +1,7 @@
 package de.esserjan.edu.imbecile.test
 
 import de.esserjan.edu.imbecile.Imbecile
+import de.esserjan.edu.imbecile.test.GitHttpsTestSupport.Companion.executor
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.Order
@@ -97,6 +98,9 @@ class GitExecutorTest : GitTestSupport() {
     fun `can git commit`() {
         resetTestScenario() // arrange
 
+        underTest.config("user.name", TestData.GIT_USER_NAME)
+        underTest.config("user.email", TestData.GIT_USER_EMAIL)
+
         val res = underTest.commit("empty commit", false, true, false)
         assertExitCodeZero(res)
     }
@@ -171,6 +175,9 @@ class GitExecutorTest : GitTestSupport() {
     fun `can git pull detect conflict`() {
         resetTestScenario() // arrange
 
+        underTest.config("user.name", TestData.GIT_USER_NAME)
+        underTest.config("user.email", TestData.GIT_USER_EMAIL)
+
         val resCommit = underTest.commit("empty commit", false, true, false)
         assertExitCodeZero(resCommit)
 
@@ -183,6 +190,9 @@ class GitExecutorTest : GitTestSupport() {
     @Order(8)
     fun `can git pull rebase`() {
         resetTestScenario() // arrange
+
+        underTest.config("user.name", TestData.GIT_USER_NAME)
+        underTest.config("user.email", TestData.GIT_USER_EMAIL)
 
         val resCommit = underTest.commit("empty commit", false, true, false)
         assertExitCodeZero(resCommit)
@@ -201,6 +211,9 @@ class GitExecutorTest : GitTestSupport() {
 
         val resAdd = underTest.add(TestData.GIT_FILE)
         assertExitCodeZero(resAdd)
+
+        underTest.config("user.name", TestData.GIT_USER_NAME)
+        underTest.config("user.email", TestData.GIT_USER_EMAIL)
 
         val resCommit = underTest.commit("file deleted accidentally oops", false, false, false)
         assertExitCodeZero(resCommit)
