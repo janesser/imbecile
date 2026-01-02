@@ -6,7 +6,7 @@ interface TestData {
     companion object {
         val GIT_PATH = File("/usr/bin/git")
 
-        val GIT_REPO = File("/home/jan/projs/egit")
+        val GIT_REPO = File("/tmp/egit.git")
         const val GIT_REPO_REMOTE = "https://github.com/eclipse-egit/egit.git"
         val GIT_FILE = File(GIT_REPO, "pom.xml")
         val GIT_FOLDER = File(GIT_REPO, "icons")
