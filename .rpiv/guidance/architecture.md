@@ -4,7 +4,7 @@ A CLI tool that executes commands inside git repositories. A Kotlin-based OSGi b
 
 ## Overview
 
-`git-executor` wraps the `git` CLI as an OSGi bundle, exposing a fluent API for git operations. It implements clean architecture with a clear separation of concerns.
+`git-executor` wraps the `git` CLI as an OSGi bundle, exposing a fluent API for git operations. It is a Kotlin-based project managed via Maven, and it implements clean architecture with a clear separation of concerns, often utilizing 'mvn test' during development.
 
 ## Project map
 
